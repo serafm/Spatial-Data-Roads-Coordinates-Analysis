@@ -66,8 +66,13 @@ with open('data/tiger_roads.csv', mode='r') as file:
 
             if xmin >= xmin_cell and xmax <= xmax_cell and ymin >= ymin_cell and ymax <= ymax_cell:
                 grid[cell][2].append(road[0])
-                grid_grd.write(str(road[0]) + ", " + str(road[1][0]) + " " + str(road[1][1]) + ", " + str(road[2]) + "\n")
-                #grid[cell][3].append(road[2])
+                min_x_mbr, min_y_mbr = str(road[1][0][0]), str(road[1][0][1])
+                max_x_mbr, max_y_mbr = str(road[1][1][0]),  str(road[1][1][1])
+                # Convert the array to a string
+                coordinates = ', '.join(str(sublist).replace(',', '') for sublist in road[2])
+                # Remove the [ ] characters from the string
+                coordinates = coordinates.replace('[', '').replace(']', '')
+                grid_grd.write(str(road[0]) + ", " + str(min_x_mbr) + " " + str(min_y_mbr) + ", " + str(max_x_mbr) + " " + str(max_y_mbr) + ", " + str(coordinates) + "\n")
 
             xmin_new = max(xmin, xmin_cell)
             ymin_new = max(ymin, ymin_cell)
@@ -75,8 +80,13 @@ with open('data/tiger_roads.csv', mode='r') as file:
             ymax_new = min(ymax, ymax_cell)
             if xmax_new >= xmin_new and ymax_new >= ymin_new:
                 grid[cell][2].append(road[0])
-                #grid[cell][3].append(road[2])
-                grid_grd.write(str(road[0]) + ", " + str(road[1][0]) + " " + str(road[1][1]) + ", " + str(road[2]) + "\n")
+                min_x_mbr, min_y_mbr = str(road[1][0][0]), str(road[1][0][1])
+                max_x_mbr, max_y_mbr = str(road[1][1][0]), str(road[1][1][1])
+                # Convert the array to a string
+                coordinates = ', '.join(str(sublist).replace(',', '') for sublist in road[2])
+                # Remove the [ ] characters from the string
+                coordinates = coordinates.replace('[', '').replace(']', '')
+                grid_grd.write(str(road[0]) + ", " + str(min_x_mbr) + " " + str(min_y_mbr) + ", " + str(max_x_mbr) + " " + str(max_y_mbr) + ", " + str(coordinates) + "\n")
 
         grid_dir.write(str(cell[0]) + " " + str(cell[1]) + " " + str(len(grid[cell][2])) + "\n")
 
