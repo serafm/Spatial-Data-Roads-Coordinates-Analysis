@@ -47,7 +47,7 @@ with open('data/tiger_roads.csv', mode='r') as file:
     for x in range(10):
         for y in range(10):
             grid[(x, y)] = [(min_x + x * (max_x - min_x) / 10, min_y + y * (max_y - min_y) / 10),
-                             (min_x + (x + 1) * (max_x - min_x) / 10, min_y + (y + 1) * (max_y - min_y) / 10)]
+                            (min_x + (x + 1) * (max_x - min_x) / 10, min_y + (y + 1) * (max_y - min_y) / 10)]
 
     grid_dir = open("data/grid.dir", "a")
     grid_dir.write(str(min_x) + " " + str(max_x) + " " + str(min_y) + " " + str(max_y) + "\n")
@@ -56,7 +56,6 @@ with open('data/tiger_roads.csv', mode='r') as file:
 
     # check MBRs
     for cell in grid:
-        grid[cell].append([])
         grid[cell].append([])
         for road in records:
             xmin, ymin = road[1][0]
@@ -67,12 +66,14 @@ with open('data/tiger_roads.csv', mode='r') as file:
             if xmin >= xmin_cell and xmax <= xmax_cell and ymin >= ymin_cell and ymax <= ymax_cell:
                 grid[cell][2].append(road[0])
                 min_x_mbr, min_y_mbr = str(road[1][0][0]), str(road[1][0][1])
-                max_x_mbr, max_y_mbr = str(road[1][1][0]),  str(road[1][1][1])
+                max_x_mbr, max_y_mbr = str(road[1][1][0]), str(road[1][1][1])
                 # Convert the array to a string
                 coordinates = ', '.join(str(sublist).replace(',', '') for sublist in road[2])
                 # Remove the [ ] characters from the string
                 coordinates = coordinates.replace('[', '').replace(']', '')
-                grid_grd.write(str(road[0]) + ", " + str(min_x_mbr) + " " + str(min_y_mbr) + ", " + str(max_x_mbr) + " " + str(max_y_mbr) + ", " + str(coordinates) + "\n")
+                grid_grd.write(
+                    str(road[0]) + ", " + str(min_x_mbr) + " " + str(min_y_mbr) + ", " + str(max_x_mbr) + " " + str(
+                        max_y_mbr) + ", " + str(coordinates) + "\n")
 
             xmin_new = max(xmin, xmin_cell)
             ymin_new = max(ymin, ymin_cell)
@@ -86,7 +87,9 @@ with open('data/tiger_roads.csv', mode='r') as file:
                 coordinates = ', '.join(str(sublist).replace(',', '') for sublist in road[2])
                 # Remove the [ ] characters from the string
                 coordinates = coordinates.replace('[', '').replace(']', '')
-                grid_grd.write(str(road[0]) + ", " + str(min_x_mbr) + " " + str(min_y_mbr) + ", " + str(max_x_mbr) + " " + str(max_y_mbr) + ", " + str(coordinates) + "\n")
+                grid_grd.write(
+                    str(road[0]) + ", " + str(min_x_mbr) + " " + str(min_y_mbr) + ", " + str(max_x_mbr) + " " + str(
+                        max_y_mbr) + ", " + str(coordinates) + "\n")
 
         grid_dir.write(str(cell[0]) + " " + str(cell[1]) + " " + str(len(grid[cell][2])) + "\n")
 
