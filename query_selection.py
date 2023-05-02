@@ -5,6 +5,7 @@ with open('data/grid.dir', 'r') as dir_file:
     grid_cells = dict()
     pos = 0
     grid_cells_mbr = dict()
+    all_mbrs = []
 
     for line in dir_file:
         cell_x, cell_y, number_of_ids = map(int, line.split())
@@ -34,6 +35,7 @@ with open('data/grid.dir', 'r') as dir_file:
                     object_max_x_mbr = float(object_max_mbr[0])
                     object_max_y_mbr = float(object_max_mbr[1])
                     object_mbr = [(object_min_x_mbr, object_min_y_mbr), (object_max_x_mbr, object_max_y_mbr)]
+                    all_mbrs.append(object_mbr)
 
                     # store coordinates values
                     for coord in object_values[3:]:
@@ -42,20 +44,21 @@ with open('data/grid.dir', 'r') as dir_file:
 
                     grid_cells[(cell_x, cell_y)].append([object_id, object_mbr, coordinates])
 
-                    # find MBR of cell
-                    if object_min_x_mbr < cell_min_mbr_x:
-                        cell_min_mbr_x = object_min_x_mbr
-                    if object_min_y_mbr < cell_min_mbr_y:
-                        cell_min_mbr_y = object_min_y_mbr
-                    if object_max_x_mbr > cell_max_mbr_x:
-                        cell_max_mbr_x = object_max_x_mbr
-                    if object_max_y_mbr > cell_max_mbr_y:
-                        cell_max_mbr_y = object_max_y_mbr
-
                 # store the new position
                 pos = grid_file.tell()
 
-                grid_cells_mbr[(cell_x, cell_y)] = [(cell_min_mbr_x, cell_min_mbr_y), (cell_max_mbr_x, cell_max_mbr_y)]
+                # find MBR of cells
+                min_x = min(mbr[0][0] for mbr in all_mbrs)
+                max_x = max(mbr[1][0] for mbr in all_mbrs)
+                min_y = min(mbr[0][1] for mbr in all_mbrs)
+                max_y = max(mbr[1][1] for mbr in all_mbrs)
+
+                # Create a grid of cells with equal range of values
+                for x in range(10):
+                    for y in range(10):
+                        grid_cells_mbr[(x, y)] = [(min_x + x * (max_x - min_x) / 10, min_y + y * (max_y - min_y) / 10),
+                                                  (min_x + (x + 1) * (max_x - min_x) / 10,
+                                                   min_y + (y + 1) * (max_y - min_y) / 10)]
 
 # Open queries.txt file for reading
 with open('data/queries.txt', 'r') as queries:
