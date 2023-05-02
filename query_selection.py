@@ -86,13 +86,39 @@ with open('data/queries.txt', 'r') as queries:
                     max_x_mbr = obj[1][1][0]
                     max_y_mbr = obj[1][1][1]
 
-                    reference_point_x = max(min_x_mbr, query_min_x)
-                    reference_point_y = max(min_y_mbr, query_min_y)
+                    if min_x_mbr <= query_max_x and max_x_mbr >= query_min_x and min_y_mbr <= query_max_y and max_y_mbr >= query_min_y:
+                        reference_point_x = max(min_x_mbr, query_min_x)
+                        reference_point_y = max(min_y_mbr, query_min_y)
 
-                    # check if x,y reference points are in the cell
-                    if cell_min_x_mbr <= reference_point_x <= cell_max_x_mbr and cell_min_y_mbr <= reference_point_y <= cell_max_y_mbr:
-                        if min_x_mbr <= query_max_x and max_x_mbr >= query_min_x and min_y_mbr <= query_max_y and max_y_mbr >= query_min_y:
-                            results.append(obj[0])
+                        # check if x,y reference points are in the cell
+                        if cell_min_x_mbr <= reference_point_x <= cell_max_x_mbr and cell_min_y_mbr <= reference_point_y <= cell_max_y_mbr:
+                            if (query_min_x < min_x_mbr < query_max_x and query_min_x < max_x_mbr < query_max_x) or (query_min_y < min_y_mbr < query_max_y and query_min_y < max_y_mbr < query_max_y):
+                                results.append(obj[0])
+                            else:
+                                for i in range(len(obj[2])):
+                                    if i < len(obj[2])-1:
+                                        x1 = obj[2][i][0]
+                                        y1 = obj[2][i][1]
+                                        x2 = obj[2][i+1][0]
+                                        y2 = obj[2][i+1][1]
+                                        x3 = query_min_x
+                                        y3 = query_min_y
+                                        x4 = query_max_x
+                                        y4 = query_max_y
+
+                                        denominator = ((x1-x2)*(y3-y4) - (y1-y2)*(x3-x4))
+                                        if denominator == 0:
+                                            continue
+
+                                        numerator1 = ((x1-x3)*(y3-y4) - (y1-y3)*(x3-x4))
+                                        numerator2 = ((x1-x3)*(y1-y2) - (y1-y3)*(x1-x2))
+
+                                        if numerator1 == 0 or numerator2 == 0:
+                                            continue
+
+                                        if 0 <= numerator1/denominator <= 1 and 0 <= numerator2/denominator <= 1:
+                                            results.append(obj[0])
+                                            break
 
         results = sorted(list(set(results)))
 
