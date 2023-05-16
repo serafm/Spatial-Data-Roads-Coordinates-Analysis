@@ -95,9 +95,10 @@ with open('data/queries.txt', 'r') as queries:
 
                         # check if x,y reference points are in the cell
                         if cell_min_x_mbr <= reference_point_x <= cell_max_x_mbr and cell_min_y_mbr <= reference_point_y <= cell_max_y_mbr:
-                            if (query_min_x < min_x_mbr < query_max_x and query_min_x < max_x_mbr < query_max_x) or (query_min_y < min_y_mbr < query_max_y and query_min_y < max_y_mbr < query_max_y):
+                            if (query_min_x <= min_x_mbr <= query_max_x and query_min_x <= max_x_mbr <= query_max_x) or (query_min_y <= min_y_mbr <= query_max_y and query_min_y <= max_y_mbr <= query_max_y):
                                 results.append(obj[0])
                             else:
+                                # Check for line segments
                                 for i in range(len(obj[2])):
                                     if i < len(obj[2])-1:
                                         x1 = obj[2][i][0]
@@ -119,6 +120,7 @@ with open('data/queries.txt', 'r') as queries:
                                         if numerator1 == 0 or numerator2 == 0:
                                             continue
 
+                                        # Store road ID if lines intersect
                                         if 0 <= numerator1/denominator <= 1 and 0 <= numerator2/denominator <= 1:
                                             results.append(obj[0])
                                             break
