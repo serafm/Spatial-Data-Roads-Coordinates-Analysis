@@ -9,7 +9,7 @@ To use this project, you need to have Python 3 installed. You can download Pytho
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/road-network-analysis.git
+git clone https://github.com/your-username/Spatial-Data-Road-Network-Analysis.git
 ```
 
 ## Usage
