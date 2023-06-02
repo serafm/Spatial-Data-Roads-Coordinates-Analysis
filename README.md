@@ -25,10 +25,6 @@ The script will read the road data from the CSV file, calculate the MBR for each
 
 Contributions are welcome! If you have any suggestions or improvements, please create a pull request. You can also open an issue to report bugs or discuss new features.
 
-## License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use and modify the code as per the license terms.
-
 ## Acknowledgements
 
 The road data used in this project is sourced from the [TIGER/Line Shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html) provided by the U.S. Census Bureau.
