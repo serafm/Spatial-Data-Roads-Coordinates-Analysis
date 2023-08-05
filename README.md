@@ -1,6 +1,7 @@
 # Roads Coordinates Analysis
 
 The aim of this project is to develop a spatial data indexing with the grid technique and then the efficient search of the data using Minimum Boundary Rectangle(MBR).
+
 Dataset: Coordinates of roads in the USA.
 
 ## Installation
