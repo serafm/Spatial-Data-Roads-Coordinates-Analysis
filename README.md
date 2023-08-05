@@ -1,6 +1,7 @@
-# Road Network Analysis
+# Roads Coordinates Analysis
 
-This project focuses on analyzing a road network using data from a CSV file. It provides functions to read the road data, calculate the minimum bounding rectangle (MBR) for each road, and perform various analyses on the road network.
+The aim of this project is to develop a spatial data indexing with the grid technique and then the efficient search of the data using Minimum Boundary Rectangle(MBR).
+Dataset: Coordinates of roads in the USA.
 
 ## Installation
 
@@ -19,7 +20,7 @@ git clone https://github.com/your-username/Spatial-Data-Road-Network-Analysis.gi
 3. Run the `main.py` file:
 
 
-The script will read the road data from the CSV file, calculate the MBR for each road, and perform various analyses on the road network.
+The script will read the road data from the CSV file, calculate the MBR for each road, and perform various analyses.
 
 ## Contributing
 
