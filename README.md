@@ -16,7 +16,7 @@ git clone https://github.com/your-username/Spatial-Data-Road-Network-Analysis.gi
 
 ## Usage
 
-1. Place your road data CSV file in the `data` directory. Make sure the CSV file has the correct format with road coordinates.
+1. Place the dataset CSV file in the `data` directory. Make sure the CSV file has the correct format with roads coordinates.
 2. Modify the `read_roads_csv()` function in `main.py` to handle your specific CSV file structure if needed.
 3. Run the `main.py` file:
 
